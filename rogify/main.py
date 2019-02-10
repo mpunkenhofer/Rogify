@@ -30,10 +30,10 @@ class Rogify:
 
         self.best_eval = (float("-inf"), {})
 
-    def rogify(self):
-        self.combinations = list(itertools.product(*self.slot_list))
+    def rogify(self, intermediate):
+        # self.combinations = list()
 
-        for c in self.combinations:
+        for c in itertools.product(*self.slot_list):
             # check for duplicates
             if any(c.count(x) > 1 for x in c):
                 continue
@@ -43,6 +43,9 @@ class Rogify:
 
             if ev > best_ev:
                 self.best_eval = ev, c
+
+                if intermediate:
+                    self.short_report()
 
     def report(self):
         ev, items = self.best_eval
@@ -60,6 +63,27 @@ class Rogify:
         grouped_items = {k: [encode_item(i) for i in v] for k, v in self.group_items(items).items()}
 
         r = json.dumps((attribute_report, grouped_items), indent=2)
+
+        print('\nBest EV: {}\n{}\n'.format(ev, r))
+
+        return r
+
+    def short_report(self):
+        ev, items = self.best_eval
+
+        attribute_total = self.attribute_sum(items)
+        attribute_report = {}
+
+        for k, v in attribute_total.items():
+            cap, fun = attributes[k]
+
+            x = max(0, min(cap, attribute_total[k]))
+
+            attribute_report[k] = '{} ({:+})'.format(x, v - cap)
+
+        item_names = [i.name for i in items]
+
+        r = json.dumps((attribute_report, item_names), indent=2)
 
         print('\nBest EV: {}\n{}\n'.format(ev, r))
 
@@ -122,8 +146,8 @@ def main():
                         help='Rogify DB file')
     parser.add_argument('-o', '--output', type=str, default='report.json',
                         help='report file name')
-    parser.add_argument('-e', '--errors', action='store_true',
-                        help='display errors')
+    parser.add_argument('-i', '--intermediate', action='store_true',
+                        help='display intermediate best calculations')
 
     args = parser.parse_args()
 
@@ -141,7 +165,7 @@ def main():
 
     print('Contemplating rogs ...')
 
-    r.rogify()
+    r.rogify(args.intermediate)
 
     report = r.report()
 

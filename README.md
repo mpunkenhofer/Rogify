@@ -5,7 +5,7 @@ All configurations are done in the [config](https://github.com/mpunkenhofer/Rogi
 ## Usage
 ```
 Rogify! v0.0.1
-usage: main.py [-h] [-o OUTPUT] [-e] database
+usage: main.py [-h] [-o OUTPUT] [-i] database
 
 Rogify! v0.0.1. Outputs the best possible combination of rogs for your
 character!
@@ -17,7 +17,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -o OUTPUT, --output OUTPUT
                         report file name
-  -e, --errors          display errors
+  -i, --intermediate    display intermediate best calculations
 ```
 
 ## Tools

@@ -13,24 +13,29 @@ def must_cap_stat(x):
     else:
         return x
 
+def resi(x):
+    if x < 15:
+        return 0.4 * x
+    else:
+        return 1.2 * x
 
 # Define attributes (you are interested in) and their cap (your cap) here
 # Format: 'ATTRIBUTE': {CAP, EVALUATION_FUNCTION}, ...
 attributes = {
-    'Crush Resist': (resi_cap, linear),
-    'Slash Resist': (resi_cap, linear),
-    'Thrust Resist': (resi_cap, linear),
-    'Heat Resist': (resi_cap, linear),
-    'Cold Resist': (resi_cap, linear),
-    'Matter Resist': (resi_cap, linear),
-    'Energy Resist': (resi_cap, linear),
-    'Spirit Resist': (resi_cap, linear),
-    'Body Resist': (resi_cap, linear),
+    'Crush Resist': (resi_cap, resi),
+    'Slash Resist': (resi_cap, resi),
+    'Thrust Resist': (resi_cap, resi),
+    'Heat Resist': (resi_cap, resi),
+    'Cold Resist': (resi_cap, resi),
+    'Matter Resist': (resi_cap, resi),
+    'Energy Resist': (resi_cap, resi),
+    'Spirit Resist': (resi_cap, resi),
+    'Body Resist': (resi_cap, resi),
     'Strength Resist': (stat_cap, f0),
     'Constitution': (stat_cap, linear),
     'Dexterity': (stat_cap, must_cap_stat),
     'Empathy': (stat_cap, linear),
-    'Hits': (200, linear),
+    'Hits': (200, f0),
     'Regrowth': (skill_cap, linear),
     'Nurture': (skill_cap, linear),
     'Nature': (skill_cap, linear)
@@ -44,14 +49,14 @@ slot_synonyms = {
     'Head':     ['Helm'],
     'Hands':    ['Gloves', 'Gauntlets'],
     'Feet':     ['Boots'],
-    'Neck':     ['Necklace'],
+    'Neck':     ['Necklace', 'Choker'],
     'Jewel':    ['Gem'],
     'Cloak':    ['Cloak'],
     'Ring':     ['Ring'],
     'Wrist':    ['Bracer'],
     'Belt':     ['Belt'],
-    'RHand':    ['Weapon', 'Hammer', 'Sword'],
-    'LHand':    ['Shield']
+    'RHand':    ['Weapon', 'Hammer', 'Sword', 'Dagger', 'Rapier', 'Shillelagh'],
+    'LHand':    ['Shield', 'Buckler']
 }
 
 # Synonyms for attributes
