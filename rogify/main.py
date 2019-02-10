@@ -19,16 +19,16 @@ class Rogify:
         self.slot_list = [l for l in self.slots.values()]
 
         # Duplicate Rings & Bracers (2 Slots of each)
-        # if 'Ring' in self.slots:
-        #     self.slot_list.append(self.slots['Ring'])
-        # if 'Wrist' in self.slots:
-        #     self.slot_list.append(self.slots['Wrist'])
+        if 'Ring' in self.slots and len(self.slots['Ring']) > 1:
+            self.slot_list.append(self.slots['Ring'])
+        if 'Wrist' in self.slots and len(self.slots['Wrist']) > 1:
+            self.slot_list.append(self.slots['Wrist'])
 
         self.attribute_synonyms = {k.lower(): v for k, v in attribute_synonyms.items()}
 
         self.combinations = []
 
-        self.best_eval = (float("-inf"), {})
+        self.best_eval = (float("-inf"), {}, {})
 
     def rogify(self):
         self.combinations = list(itertools.product(*self.slot_list))
@@ -38,18 +38,18 @@ class Rogify:
             if any(c.count(x) > 1 for x in c):
                 continue
 
-            ev = self.eval(c)
-            best_ev, items = self.best_eval
+            ev, attribute_total = self.eval(c)
+            best_ev, _, _ = self.best_eval
 
             if ev > best_ev:
-                self.best_eval = ev, c
+                self.best_eval = ev, attribute_total, c
 
     def report(self):
-        ev, items = self.best_eval
+        ev, attribute_total, items, = self.best_eval
 
         grouped_items = {k: [encode_item(i) for i in v] for k, v in self.group_items(items).items()}
 
-        r = json.dumps(grouped_items, indent=2)
+        r = json.dumps((attribute_total, grouped_items), indent=2)
 
         print('Best EV: {}\n{}'.format(ev, r))
 
@@ -67,7 +67,7 @@ class Rogify:
                 x = max(0, min(cap, attribute_total[attribute_type]))
                 ev += fun(x)
 
-        return ev
+        return ev, attribute_total
 
     def attribute_sum(self, items):
         attribute_total = {}
