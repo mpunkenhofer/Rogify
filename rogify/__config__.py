@@ -42,14 +42,16 @@ slot_synonyms = {
     'Arms':     ['Sleeves'],
     'Legs':     ['Greaves'],
     'Head':     ['Helm'],
-    'Hands':    ['Gloves'],
+    'Hands':    ['Gloves', 'Gauntlets'],
     'Feet':     ['Boots'],
     'Neck':     ['Necklace'],
     'Jewel':    ['Gem'],
     'Cloak':    ['Cloak'],
     'Ring':     ['Ring'],
     'Wrist':    ['Bracer'],
-    'Belt':     ['Belt']
+    'Belt':     ['Belt'],
+    'RHand':    ['Weapon', 'Hammer', 'Sword'],
+    'LHand':    ['Shield']
 }
 
 # Synonyms for attributes

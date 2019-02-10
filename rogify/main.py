@@ -28,7 +28,7 @@ class Rogify:
 
         self.combinations = []
 
-        self.best_eval = (float("-inf"), {}, {})
+        self.best_eval = (float("-inf"), {})
 
     def rogify(self):
         self.combinations = list(itertools.product(*self.slot_list))
@@ -38,20 +38,30 @@ class Rogify:
             if any(c.count(x) > 1 for x in c):
                 continue
 
-            ev, attribute_total = self.eval(c)
-            best_ev, _, _ = self.best_eval
+            ev = self.eval(c)
+            best_ev, _ = self.best_eval
 
             if ev > best_ev:
-                self.best_eval = ev, attribute_total, c
+                self.best_eval = ev, c
 
     def report(self):
-        ev, attribute_total, items, = self.best_eval
+        ev, items = self.best_eval
+
+        attribute_total = self.attribute_sum(items)
+        attribute_report = {}
+
+        for k, v in attribute_total.items():
+            cap, fun = attributes[k]
+
+            x = max(0, min(cap, attribute_total[k]))
+
+            attribute_report[k] = '{} ({:+})'.format(x, v - cap)
 
         grouped_items = {k: [encode_item(i) for i in v] for k, v in self.group_items(items).items()}
 
-        r = json.dumps((attribute_total, grouped_items), indent=2)
+        r = json.dumps((attribute_report, grouped_items), indent=2)
 
-        print('Best EV: {}\n{}'.format(ev, r))
+        print('\nBest EV: {}\n{}\n'.format(ev, r))
 
         return r
 
@@ -67,7 +77,7 @@ class Rogify:
                 x = max(0, min(cap, attribute_total[attribute_type]))
                 ev += fun(x)
 
-        return ev, attribute_total
+        return ev
 
     def attribute_sum(self, items):
         attribute_total = {}

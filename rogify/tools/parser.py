@@ -45,7 +45,10 @@ def parse_log(filename):
 
                         line = next(f)
 
-                    items.append(Item(item_name, Slot(item_name), attributes))
+                    new_item = Item(item_name, Slot(item_name), attributes)
+
+                    if new_item not in items:
+                        items.append(new_item)
 
                 line = next(f)
         except StopIteration:
