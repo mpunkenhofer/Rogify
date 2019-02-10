@@ -1,0 +1,82 @@
+[
+  {
+    "Name": "Thrustbender Arcanite Improved Osnadurtha Hauberk",
+    "Slot": "Chest",
+    "Attributes": {
+      "Dexterity": 10,
+      "Hits": 40,
+      "Slash Resist": 5,
+      "Thrust Resist": 6,
+      "Acuity": 1,
+      "ALL magic skills": 1
+    }
+  },
+  {
+    "Name": "Slashbender Arcanite Improved Osnadurtha Hauberk",
+    "Slot": "Chest",
+    "Attributes": {
+      "Dexterity": 10,
+      "Hits": 40,
+      "Slash Resist": 15,
+      "Thrust Resist": 6,
+      "Acuity": 1,
+      "ALL magic skills": 1
+    }
+  },
+  {
+    "Name": "Adroit Supreme Gem",
+    "Slot": "Jewel",
+    "Attributes": {
+      "Dexterity": 16,
+      "Body Resist": 5,
+      "Heat Resist": 6,
+      "Spirit Resist": 4,
+      "ALL magic skills": 2
+    }
+  },
+  {
+    "Name": "Edgebender Supreme Ring",
+    "Slot": "Ring",
+    "Attributes": {
+      "Dexterity": 11,
+      "Hits": 16,
+      "Heat Resist": 6,
+      "Slash Resist": 6,
+      "Spirit Resist": 1,
+      "Thrust Resist": 1,
+      "ALL magic skills": 1
+    }
+  },
+  {
+    "Name": "Energybender Supreme Bracer",
+    "Slot": "Wrist",
+    "Attributes": {
+      "Dexterity": 14,
+      "Constitution": 7,
+      "Power": 1,
+      "Energy Resist": 9,
+      "Acuity": 16,
+      "ALL magic skills": 1
+    }
+  },
+  {
+    "Name": "My fukced Slot item",
+    "Slot": "Unknown",
+    "Attributes": {
+      "Dexterity": 88,
+      "Constitution": 17,
+      "Power": 1
+    }
+  },
+  {
+    "Name": "Thrustbender Arcanite Improved Osnadurtha Greaves",
+    "Slot": "Legs",
+    "Attributes": {
+      "Dexterity": 10,
+      "Constitution": 7,
+      "Hits": 16,
+      "Slash Resist": 4,
+      "Thrust Resist": 6
+    }
+  }
+]
